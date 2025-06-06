@@ -29,17 +29,8 @@ const cantons = [
   "Zurich (ZH)",
 ];
 
-const regionsOfas = [
-  "Région 1 - Grands centres urbains",
-  "Région 2 - Villes et agglomérations",
-  "Région 3 - Zones rurales",
-];
-
 const statuts = ["Bénéficiaire AVS", "Bénéficiaire AI"];
-
-const cantons = [ /* ... */ ];
 const regionsOfas = [ /* ... */ ];
-const statuts = [ /* ... */ ];
 
 export default function PCEMSPage1({ formData = {}, handleInputChange }) {
   const [situationCouple, setSituationCouple] = useState(
@@ -71,6 +62,30 @@ export default function PCEMSPage1({ formData = {}, handleInputChange }) {
         <div style={{ opacity: 0.9, marginTop: 6 }}>
           Estimation des prestations complémentaires selon la législation en
           vigueur dès le 1er janvier 2025
+        </div>
+        <div>
+          <label>Répartition du couple :</label>
+          <select
+            name="repartitionCouple"
+            value={formData.repartitionCouple || ""}
+            onChange={handleInputChange}
+          >
+            <option value="">Sélectionnez une option</option>
+            <option value="unEnEMS">Un en EMS, un à domicile</option>
+            <option value="deuxEnEMS">Les deux en EMS</option>
+            <option value="deuxADomicile">Les deux à domicile</option>
+          </select>
+        </div>
+        <div>
+          <label>Âge du conjoint :</label>
+          <input
+            type="number"
+            name="ageConjoint"
+            value={formData.ageConjoint || ""}
+            onChange={handleInputChange}
+            min="0"
+            max="120"
+          />
         </div>
         <div
           style={{
