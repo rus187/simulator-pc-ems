@@ -918,7 +918,9 @@ const PCEMSSimulator = () => {
     }
   };
 
-  return <PCEMSPage1 />;
+  return (
+    <PCEMSPage1 formData={formData} handleInputChange={handleInputChange} />
+  );
 };
 
 export default PCEMSSimulator;
