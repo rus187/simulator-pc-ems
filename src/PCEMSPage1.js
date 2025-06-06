@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const cantons = [
   "Argovie (AG)",
@@ -37,7 +37,14 @@ const regionsOfas = [
 
 const statuts = ["Bénéficiaire AVS", "Bénéficiaire AI"];
 
-export default function PCEMSPage1() {
+export default function PCEMSPage1({ formData = {}, handleInputChange }) {
+  const [situationCouple, setSituationCouple] = useState(
+    formData.situationCouple || "avecConjoint"
+  );
+  const [repartitionCouple, setRepartitionCouple] = useState(
+    formData.repartitionCouple || "unEnEMS"
+  );
+
   return (
     <div
       style={{
@@ -169,18 +176,46 @@ export default function PCEMSPage1() {
               <div style={{ marginTop: 8 }}>
                 <input
                   type="radio"
-                  name="couple"
-                  defaultChecked
+                  name="situationCouple"
+                  value="avecConjoint"
+                  checked={situationCouple === "avecConjoint"}
+                  onChange={(e) => {
+                    setSituationCouple(e.target.value);
+                    handleInputChange && handleInputChange(e);
+                  }}
                   style={{ accentColor: "#23408e" }}
                 />{" "}
                 Avec conjoint
                 <input
                   type="radio"
-                  name="couple"
+                  name="situationCouple"
+                  value="sansConjoint"
+                  checked={situationCouple === "sansConjoint"}
+                  onChange={(e) => {
+                    setSituationCouple(e.target.value);
+                    handleInputChange && handleInputChange(e);
+                  }}
                   style={{ accentColor: "#23408e", marginLeft: 18 }}
                 />{" "}
                 Sans conjoint
               </div>
+              {situationCouple === "avecConjoint" && (
+                <div style={{ marginTop: 12 }}>
+                  <label style={{ fontWeight: 500 }}>Répartition du couple</label>
+                  <select
+                    name="repartitionCouple"
+                    value={repartitionCouple}
+                    onChange={(e) => {
+                      setRepartitionCouple(e.target.value);
+                      handleInputChange && handleInputChange(e);
+                    }}
+                    style={selectStyle}
+                  >
+                    <option value="unEnEMS">Un conjoint en EMS</option>
+                    <option value="deuxEnEMS">Les deux en EMS</option>
+                  </select>
+                </div>
+              )}
             </div>
           </div>
           {/* Colonne 2 */}
