@@ -1,19 +1,42 @@
 import React from "react";
 
-const cantons = [ /* ... */ ];
-const regionsOfas = [ /* ... */ ];
-const statuts = [ /* ... */ ];
+const cantons = [
+  "Argovie (AG)",
+  "Appenzell Rhodes-Extérieures (AR)",
+  "Appenzell Rhodes-Intérieures (AI)",
+  "Bâle-Campagne (BL)",
+  "Bâle-Ville (BS)",
+  "Berne (BE)",
+  "Fribourg (FR)",
+  "Genève (GE)",
+  "Glaris (GL)",
+  "Grisons (GR)",
+  "Jura (JU)",
+  "Lucerne (LU)",
+  "Neuchâtel (NE)",
+  "Nidwald (NW)",
+  "Obwald (OW)",
+  "Saint-Gall (SG)",
+  "Schaffhouse (SH)",
+  "Schwyz (SZ)",
+  "Soleure (SO)",
+  "Tessin (TI)",
+  "Thurgovie (TG)",
+  "Uri (UR)",
+  "Valais (VS)",
+  "Vaud (VD)",
+  "Zoug (ZG)",
+  "Zurich (ZH)",
+];
 
-export default function PCEMSPage1() {
-  return (
-    <div>
-      {/* ... le reste de ton composant ... */}
-    </div>
-  );
-}
+const regionsOfas = [
+  "Région 1 - Grands centres urbains",
+  "Région 2 - Villes et agglomérations",
+  "Région 3 - Zones rurales",
+];
 
-  );
-}
+const statuts = ["Bénéficiaire AVS", "Bénéficiaire AI"];
+
 export default function PCEMSPage1() {
   return (
     <div
@@ -121,16 +144,26 @@ export default function PCEMSPage1() {
         <div style={{ display: "flex", gap: 32 }}>
           {/* Colonne 1 */}
           <div style={{ flex: 1 }}>
-            <label style={{ fontWeight: 500 }}>Canton de domicile</label>
-            <select style={selectStyle}>
-              <option>Sélectionnez un canton</option>
-            </select>
-            <label style={{ fontWeight: 500, marginTop: 20, display: "block" }}>
-              Statut AVS/AI
-            </label>
-            <select style={selectStyle}>
-              <option>Sélectionnez un statut</option>
-            </select>
+          <label style={{ fontWeight: 500 }}>Canton de domicile</label>
+          <select style={selectStyle}>
+            <option value="">Sélectionnez un canton</option>
+            {cantons.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          <label style={{ fontWeight: 500, marginTop: 20, display: "block" }}>
+            Statut AVS/AI
+          </label>
+          <select style={selectStyle}>
+            <option value="">Sélectionnez un statut</option>
+            {statuts.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </select>
             <div style={{ marginTop: 20 }}>
               <label style={{ fontWeight: 500 }}>Situation de couple</label>
               <div style={{ marginTop: 8 }}>
@@ -152,12 +185,17 @@ export default function PCEMSPage1() {
           </div>
           {/* Colonne 2 */}
           <div style={{ flex: 1 }}>
-            <label style={{ fontWeight: 500 }}>
-              Région de loyer (selon l'OFAS)
-            </label>
-            <select style={selectStyle}>
-              <option>Sélectionnez une région</option>
-            </select>
+          <label style={{ fontWeight: 500 }}>
+            Région de loyer (selon l'OFAS)
+          </label>
+          <select style={selectStyle}>
+            <option value="">Sélectionnez une région</option>
+            {regionsOfas.map((r) => (
+              <option key={r} value={r}>
+                {r}
+              </option>
+            ))}
+          </select>
             <label style={{ fontWeight: 500, marginTop: 20, display: "block" }}>
               Âge du résident EMS
             </label>
