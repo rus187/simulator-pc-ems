@@ -5,18 +5,20 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
+    "alcwa_base_server": "1.2.3",
+    "lucide-react": "0.513.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "^5.0.0",
-    "lucide-react": "0.513.0",
-    "recharts": "2.15.3",
-    "alcwa_base_server": "1.2.3"
+    "recharts": "2.15.3"
   },
   "devDependencies": {
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
     "loader-utils": "3.2.1",
-    "typescript": "5.7.2"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
