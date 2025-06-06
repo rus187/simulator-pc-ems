@@ -6,16 +6,6 @@ const statuts = [ /* ... */ ];
 
 export default function PCEMSPage1() {
   return (
-    <div>
-      {/* ... le reste de ton composant ... */}
-    </div>
-  );
-}
-
-  );
-}
-export default function PCEMSPage1() {
-  return (
     <div
       style={{
         fontFamily: "Inter, Arial, sans-serif",
