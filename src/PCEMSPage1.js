@@ -72,30 +72,6 @@ export default function PCEMSPage1({ formData = {}, handleInputChange }) {
           Estimation des prestations complémentaires selon la législation en
           vigueur dès le 1er janvier 2025
         </div>
-        <div>
-          <label>Répartition du couple :</label>
-          <select
-            name="repartitionCouple"
-            value={formData.repartitionCouple || ""}
-            onChange={handleInputChange}
-          >
-            <option value="">Sélectionnez une option</option>
-            <option value="unEnEMS">Un en EMS, un à domicile</option>
-            <option value="deuxEnEMS">Les deux en EMS</option>
-            <option value="deuxADomicile">Les deux à domicile</option>
-          </select>
-        </div>
-        <div>
-          <label>Âge du conjoint :</label>
-          <input
-            type="number"
-            name="ageConjoint"
-            value={formData.ageConjoint || ""}
-            onChange={handleInputChange}
-            min="0"
-            max="120"
-          />
-        </div>
         <div
           style={{
             position: "absolute",
