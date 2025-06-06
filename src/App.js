@@ -129,6 +129,8 @@ const PCEMSSimulator = () => {
       if (name === "repartitionCouple") {
         if (newValue === "unEnEMS" || newValue === "deuxEnEMS") {
           updated.tauxImputationFortune = "20"; // 20% par défaut pour EMS
+        } else if (newValue === "deuxADomicile") {
+          updated.tauxImputationFortune = "10"; // 10% pour un couple à domicile
         }
       }
 
@@ -211,7 +213,7 @@ const PCEMSSimulator = () => {
 
     const residenceApresAbattement = Math.max(
       0,
-      residencePrincipale - abattement
+      residencePrincipale - abattement,
     );
 
     // Règle 2025: Exonération du logement principal si fortune mobilière ≤ 200'000 CHF
@@ -297,11 +299,11 @@ const PCEMSSimulator = () => {
     const franchiseActivite = 12000;
     const revenuActiviteResidentNet = Math.max(
       0,
-      revenuActiviteResident - franchiseActivite
+      revenuActiviteResident - franchiseActivite,
     );
     const revenuActiviteConjointNet = Math.max(
       0,
-      revenuActiviteConjoint - franchiseActivite
+      revenuActiviteConjoint - franchiseActivite,
     );
 
     const revenusActiviteLucrative =
@@ -441,7 +443,7 @@ const PCEMSSimulator = () => {
     // Calcul des PC annuelles
     const pcAnnuelles = Math.max(
       0,
-      chargesCalculs.totalChargesAnnuelles - totalRevenusAvecImputation
+      chargesCalculs.totalChargesAnnuelles - totalRevenusAvecImputation,
     );
     const pcMensuelles = pcAnnuelles / 12;
 
@@ -468,7 +470,7 @@ const PCEMSSimulator = () => {
       const totalChargesReparties = chargesResident + chargesConjoint;
       if (totalChargesReparties > 0) {
         pcResident = Math.round(
-          pcAnnuelles * (chargesResident / totalChargesReparties)
+          pcAnnuelles * (chargesResident / totalChargesReparties),
         );
         pcConjoint = pcAnnuelles - pcResident; // Pour s'assurer que le total reste correct
       }
@@ -561,7 +563,7 @@ const PCEMSSimulator = () => {
       const printWindow = window.open(
         "",
         "PRINT",
-        "height=650,width=900,top=100,left=150"
+        "height=650,width=900,top=100,left=150",
       );
       if (!printWindow) {
         alert("Veuillez autoriser les pop-ups pour exporter en PDF");
@@ -772,10 +774,10 @@ const PCEMSSimulator = () => {
             <h2>Droit mensuel aux prestations complémentaires</h2>
             <div class="result-amount">${pcCalculs.pcMensuelles.toLocaleString(
               "fr-CH",
-              { minimumFractionDigits: 0, maximumFractionDigits: 0 }
+              { minimumFractionDigits: 0, maximumFractionDigits: 0 },
             )} CHF / mois</div>
             <p style="margin: 5px 0; color: #666;">soit ${pcCalculs.pcAnnuelles.toLocaleString(
-              "fr-CH"
+              "fr-CH",
             )} CHF par année</p>
           </div>
           
@@ -798,8 +800,8 @@ const PCEMSSimulator = () => {
                   formData.statutAVSAI === "avs"
                     ? "Bénéficiaire AVS"
                     : formData.statutAVSAI === "ai"
-                    ? "Bénéficiaire AI"
-                    : "Non renseigné"
+                      ? "Bénéficiaire AI"
+                      : "Non renseigné"
                 }</td>
               </tr>
               <tr>
@@ -837,7 +839,7 @@ const PCEMSSimulator = () => {
               <tr class="total-row">
                 <td class="label">Fortune prise en compte</td>
                 <td class="value">${fortuneCalculs.fortunePriseEnCompte.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
             </table>
@@ -849,19 +851,19 @@ const PCEMSSimulator = () => {
               <tr>
                 <td class="label">Rentes AVS/AI</td>
                 <td class="value">${revenusCalculs.rentesAVSAI.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
               <tr>
                 <td class="label">Rentes LPP</td>
                 <td class="value">${revenusCalculs.rentesLPP.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
               <tr class="total-row">
                 <td class="label">Total des revenus annuels</td>
                 <td class="value">${revenusCalculs.totalRevenusAnnuels.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
             </table>
@@ -873,19 +875,19 @@ const PCEMSSimulator = () => {
               <tr>
                 <td class="label">Assurance maladie</td>
                 <td class="value">${chargesCalculs.assuranceMaladie.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
               <tr>
                 <td class="label">Besoins vitaux</td>
                 <td class="value">${chargesCalculs.besoinsVitaux.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
               <tr class="total-row">
                 <td class="label">Total des charges annuelles</td>
                 <td class="value">${chargesCalculs.totalChargesAnnuelles.toLocaleString(
-                  "fr-CH"
+                  "fr-CH",
                 )} CHF</td>
               </tr>
             </table>
@@ -913,7 +915,7 @@ const PCEMSSimulator = () => {
     } catch (error) {
       console.error("Erreur lors de l'export PDF:", error);
       alert(
-        "Une erreur est survenue lors de l'export PDF. Veuillez réessayer."
+        "Une erreur est survenue lors de l'export PDF. Veuillez réessayer.",
       );
     }
   };

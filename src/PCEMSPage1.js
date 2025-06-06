@@ -30,14 +30,23 @@ const cantons = [
 ];
 
 const statuts = ["Bénéficiaire AVS", "Bénéficiaire AI"];
-const regionsOfas = [ /* ... */ ];
+
+const cantons = [
+  /* ... */
+];
+const regionsOfas = [
+  /* ... */
+];
+const statuts = [
+  /* ... */
+];
 
 export default function PCEMSPage1({ formData = {}, handleInputChange }) {
   const [situationCouple, setSituationCouple] = useState(
-    formData.situationCouple || "avecConjoint"
+    formData.situationCouple || "avecConjoint",
   );
   const [repartitionCouple, setRepartitionCouple] = useState(
-    formData.repartitionCouple || "unEnEMS"
+    formData.repartitionCouple || "unEnEMS",
   );
 
   return (
@@ -170,26 +179,26 @@ export default function PCEMSPage1({ formData = {}, handleInputChange }) {
         <div style={{ display: "flex", gap: 32 }}>
           {/* Colonne 1 */}
           <div style={{ flex: 1 }}>
-          <label style={{ fontWeight: 500 }}>Canton de domicile</label>
-          <select style={selectStyle}>
-            <option value="">Sélectionnez un canton</option>
-            {cantons.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-          <label style={{ fontWeight: 500, marginTop: 20, display: "block" }}>
-            Statut AVS/AI
-          </label>
-          <select style={selectStyle}>
-            <option value="">Sélectionnez un statut</option>
-            {statuts.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
+            <label style={{ fontWeight: 500 }}>Canton de domicile</label>
+            <select style={selectStyle}>
+              <option value="">Sélectionnez un canton</option>
+              {cantons.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            <label style={{ fontWeight: 500, marginTop: 20, display: "block" }}>
+              Statut AVS/AI
+            </label>
+            <select style={selectStyle}>
+              <option value="">Sélectionnez un statut</option>
+              {statuts.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
             <div style={{ marginTop: 20 }}>
               <label style={{ fontWeight: 500 }}>Situation de couple</label>
               <div style={{ marginTop: 8 }}>
@@ -220,7 +229,9 @@ export default function PCEMSPage1({ formData = {}, handleInputChange }) {
               </div>
               {situationCouple === "avecConjoint" && (
                 <div style={{ marginTop: 12 }}>
-                  <label style={{ fontWeight: 500 }}>Répartition du couple</label>
+                  <label style={{ fontWeight: 500 }}>
+                    Répartition du couple
+                  </label>
                   <select
                     name="repartitionCouple"
                     value={repartitionCouple}
@@ -230,8 +241,9 @@ export default function PCEMSPage1({ formData = {}, handleInputChange }) {
                     }}
                     style={selectStyle}
                   >
-                    <option value="unEnEMS">Un conjoint en EMS</option>
+                    <option value="unEnEMS">Un en EMS, un à domicile</option>
                     <option value="deuxEnEMS">Les deux en EMS</option>
+                    <option value="deuxADomicile">Les deux à domicile</option>
                   </select>
                 </div>
               )}
@@ -239,21 +251,43 @@ export default function PCEMSPage1({ formData = {}, handleInputChange }) {
           </div>
           {/* Colonne 2 */}
           <div style={{ flex: 1 }}>
-          <label style={{ fontWeight: 500 }}>
-            Région de loyer (selon l'OFAS)
-          </label>
-          <select style={selectStyle}>
-            <option value="">Sélectionnez une région</option>
-            {regionsOfas.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </select>
+            <label style={{ fontWeight: 500 }}>
+              Région de loyer (selon l'OFAS)
+            </label>
+            <select style={selectStyle}>
+              <option value="">Sélectionnez une région</option>
+              {regionsOfas.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </select>
             <label style={{ fontWeight: 500, marginTop: 20, display: "block" }}>
               Âge du résident EMS
             </label>
-            <input type="number" value={70} style={inputStyle} />
+            <input
+              type="number"
+              name="ageResident"
+              value={formData.ageResident || ""}
+              onChange={handleInputChange}
+              style={inputStyle}
+            />
+            {situationCouple === "avecConjoint" && (
+              <>
+                <label
+                  style={{ fontWeight: 500, marginTop: 20, display: "block" }}
+                >
+                  Âge du conjoint
+                </label>
+                <input
+                  type="number"
+                  name="ageConjoint"
+                  value={formData.ageConjoint || ""}
+                  onChange={handleInputChange}
+                  style={inputStyle}
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
